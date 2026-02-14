@@ -22,6 +22,15 @@ model_option = st.selectbox(
 FEATURE_COLUMNS = ['Gender', 'Age', 'Height', 'Weight', 'family_history_with_overweight',
        'FAVC', 'FCVC', 'NCP', 'CAEC', 'SMOKE', 'CH2O', 'SCC', 'FAF', 'TUE',
        'CALC', 'MTRANS']
+class_labels = {
+        0: "Insufficient Weight",
+        1: "Normal Weight",
+        2: "Overweight Level I",
+        3: "Overweight Level II",
+        4: "Obesity Type I",
+        5: "Obesity Type II",
+        6: "Obesity Type III"
+}
 
 st.write(
     "Enter your data on the left and click **Predict** to see your obesity level."
@@ -98,9 +107,11 @@ if st.button("Predict my obesity level"):
                 prediction = rf.predict(data_processed)
         else:
                 prediction = xgb.predict(data_processed)
-
+        
+        predicted_class = prediction[0]
+    
         st.write("Predictions:")
-        st.write(prediction)
+        st.success(f"Predicted Obesity Level: {class_labels[predicted_class]}")
 
         st.write("### Input Features Sent to Model")
         st.dataframe(data)
