@@ -6,7 +6,8 @@ xgboost
 streamlit
 joblib
 seaborn
-altair==4.2.2
+altair<5
+
 
 
 
