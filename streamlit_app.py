@@ -111,7 +111,7 @@ if st.button("Predict my obesity level"):
         predicted_class = prediction[0]
     
         st.write("Predictions:")
-        st.success(f"Predicted Obesity Level: {class_labels[predicted_class]}")
+        st.success(f"Predicted Obesity Level: {predicted_class, class_labels[predicted_class]}")
 
         st.write("### Input Features Sent to Model")
         st.dataframe(data)
