@@ -123,3 +123,140 @@ X_train, X_test, y_train, y_test = train_test_split(
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
+
+print("Training Dataset size:", X_train.shape)
+print("Testing Dataset size:", X_test.shape)
+
+print("Training Data columns:", X_train.columns)
+
+results = {}
+
+# Logistic Regression
+lr = LogisticRegression(max_iter=500)
+lr.fit(X_train_scaled, y_train)
+
+y_pred = lr.predict(X_test_scaled)
+y_prob = lr.predict_proba(X_test_scaled)
+
+results['Logistic Regression'] = {
+    "Accuracy": accuracy_score(y_test, y_pred),
+    "AUC": roc_auc_score(label_binarize(y_test, classes=np.unique(y)), y_prob, multi_class='ovr'),
+    "Precision": precision_score(y_test, y_pred, average='weighted'),
+    "Recall": recall_score(y_test, y_pred, average='weighted'),
+    "F1 Score": f1_score(y_test, y_pred, average='weighted'),
+    "MCC": matthews_corrcoef(y_test, y_pred)
+}
+
+# Decision Tree
+dt = DecisionTreeClassifier(random_state=42)
+dt.fit(X_train, y_train)
+
+y_pred = dt.predict(X_test)
+y_prob = dt.predict_proba(X_test)
+
+results['Decision Tree'] = {
+    "Accuracy": accuracy_score(y_test, y_pred),
+    "AUC": roc_auc_score(label_binarize(y_test, classes=np.unique(y)), y_prob, multi_class='ovr'),
+    "Precision": precision_score(y_test, y_pred, average='weighted'),
+    "Recall": recall_score(y_test, y_pred, average='weighted'),
+    "F1 Score": f1_score(y_test, y_pred, average='weighted'),
+    "MCC": matthews_corrcoef(y_test, y_pred)
+}
+
+# KNN
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(X_train_scaled, y_train)
+
+y_pred = knn.predict(X_test_scaled)
+y_prob = knn.predict_proba(X_test_scaled)
+
+results['KNN'] = {
+    "Accuracy": accuracy_score(y_test, y_pred),
+    "AUC": roc_auc_score(label_binarize(y_test, classes=np.unique(y)), y_prob, multi_class='ovr'),
+    "Precision": precision_score(y_test, y_pred, average='weighted'),
+    "Recall": recall_score(y_test, y_pred, average='weighted'),
+    "F1 Score": f1_score(y_test, y_pred, average='weighted'),
+    "MCC": matthews_corrcoef(y_test, y_pred)
+}
+
+# Naive Bayes
+nb = GaussianNB()
+nb.fit(X_train, y_train)
+
+y_pred = nb.predict(X_test)
+y_prob = nb.predict_proba(X_test)
+
+results['Naive Bayes'] = {
+    "Accuracy": accuracy_score(y_test, y_pred),
+    "AUC": roc_auc_score(label_binarize(y_test, classes=np.unique(y)), y_prob, multi_class='ovr'),
+    "Precision": precision_score(y_test, y_pred, average='weighted'),
+    "Recall": recall_score(y_test, y_pred, average='weighted'),
+    "F1 Score": f1_score(y_test, y_pred, average='weighted'),
+    "MCC": matthews_corrcoef(y_test, y_pred)
+}
+
+# Random Forest
+rf = RandomForestClassifier(n_estimators=200, random_state=42)
+rf.fit(X_train, y_train)
+
+importances = rf.feature_importances_
+feature_importance_df = pd.Series(importances, index=X_train.columns).sort_values(ascending=False)
+
+print("\nRandom Forest Feature Importance (sorted):")
+print(feature_importance_df)
+
+# Plot Feature Importance
+plt.figure()
+plt.bar(feature_importance_df.index, feature_importance_df.values)
+plt.xticks(rotation=90)
+plt.title("Random Forest Feature Importance")
+plt.xlabel("Features")
+plt.ylabel("Importance Score")
+plt.show()
+
+# Display top important features
+top_features = feature_importance_df.head(5)
+print("\nTop 5 Most Informative Features:")
+print(top_features)
+
+y_pred = rf.predict(X_test)
+y_prob = rf.predict_proba(X_test)
+
+results['Random Forest'] = {
+    "Accuracy": accuracy_score(y_test, y_pred),
+    "AUC": roc_auc_score(label_binarize(y_test, classes=np.unique(y)), y_prob, multi_class='ovr'),
+    "Precision": precision_score(y_test, y_pred, average='weighted'),
+    "Recall": recall_score(y_test, y_pred, average='weighted'),
+    "F1 Score": f1_score(y_test, y_pred, average='weighted'),
+    "MCC": matthews_corrcoef(y_test, y_pred)
+}
+
+# XGBoost
+xgb = XGBClassifier(eval_metric='mlogloss', use_label_encoder=False)
+xgb.fit(X_train, y_train)
+
+y_pred = xgb.predict(X_test)
+y_prob = xgb.predict_proba(X_test)
+
+results['XGBoost'] = {
+    "Accuracy": accuracy_score(y_test, y_pred),
+    "AUC": roc_auc_score(label_binarize(y_test, classes=np.unique(y)), y_prob, multi_class='ovr'),
+    "Precision": precision_score(y_test, y_pred, average='weighted'),
+    "Recall": recall_score(y_test, y_pred, average='weighted'),
+    "F1 Score": f1_score(y_test, y_pred, average='weighted'),
+    "MCC": matthews_corrcoef(y_test, y_pred)
+}
+
+# Compare Results
+results_df = pd.DataFrame(results).T
+results_df
+
+import joblib
+joblib.dump(lr, "model/logistic_regression_model.pkl")
+joblib.dump(dt, "model/decision_tree_model.pkl")
+joblib.dump(knn, "model/knn_model.pkl")
+joblib.dump(nb, "model/naive_bayes_model.pkl")
+joblib.dump(rf, "model/random_forest_model.pkl")
+joblib.dump(xgb, "model/xgboost_model.pkl")
+joblib.dump(scaler, "model/preprocessing_pipeline.pkl")
+
