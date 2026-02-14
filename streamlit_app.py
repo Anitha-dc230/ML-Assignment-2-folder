@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-from IPython.utils.sysinfo import num_cpus
+
 st.title("Obesity Level Classification App")
 
 # Load models
