@@ -25,11 +25,11 @@ FEATURE_COLUMNS = ['Gender', 'Age', 'Height', 'Weight', 'family_history_with_ove
 class_labels = {
         0: "Insufficient Weight",
         1: "Normal Weight",
-        2: "Overweight Level I",
-        3: "Overweight Level II",
-        4: "Obesity Type I",
-        5: "Obesity Type II",
-        6: "Obesity Type III"
+        2: "Obesity Type I",
+        3: "Obesity Type II",
+        4: "Obesity Type III",
+        5: "Overweight Level I",
+        6: "Overweight Level II"
 }
 
 st.write(
