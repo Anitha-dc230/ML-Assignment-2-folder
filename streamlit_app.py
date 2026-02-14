@@ -101,5 +101,8 @@ if st.button("Predict my obesity level"):
 
         st.write("Predictions:")
         st.write(prediction)
+
+        st.write("### Input Features Sent to Model")
+        st.dataframe(data)
 else:
     st.info("Fill the details on the left and click **Predict my obesity level**.")
