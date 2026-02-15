@@ -74,7 +74,7 @@ if uploaded_file is not None:
     
     for col in test_data.select_dtypes(include='object').columns:
         le = LabelEncoder()
-        test_data[col] = le.fit_transform(df[col])
+        test_data[col] = le.fit_transform(test_data[col])
         label_encoders[col] = le
         
     # Separate target if present
