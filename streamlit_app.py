@@ -98,7 +98,7 @@ if uploaded_file is not None:
 
     # Manual preprocessing
     #data = preprocess_uploaded_data(X_test)
-    data_processed = pipeline.transform(data)
+    data_processed = pipeline.transform(X_test)
     
   
     if st.button("Predict my obesity level"):
