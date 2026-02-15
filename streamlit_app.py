@@ -126,15 +126,19 @@ if uploaded_file is not None:
                 prediction = xgb.predict(data_processed)
 
         
-        predicted_class = prediction[0]
+        predicted_class = int(prediction[0])
         accuracy = accuracy_score(y_test, prediction)
         precision = precision_score(y_test, prediction, average='weighted')
         recall = recall_score(y_test, prediction, average='weighted')
         f1 = f1_score(y_test, prediction, average='weighted')
         #auc = roc_auc_score(y_test, model.predict_proba(data_processed), multi_class='ovr')
+        auc = 0
         mcc = matthews_corrcoef(y_test, prediction)
     
         st.write("Predictions:")
+       # if model_option == "XGBoost":
+        #    st.success(f"Predicted Obesity Level: {predicted_class, class_labels[int(predicted_class)]}")
+        #else:
         st.success(f"Predicted Obesity Level: {predicted_class, class_labels[predicted_class]}")
 
         st.write("## Confusion Matrix")
