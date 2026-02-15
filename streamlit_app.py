@@ -108,7 +108,7 @@ if uploaded_file is not None:
                 auc = roc_auc_score(y_test, lr.predict_proba(data_processed), multi_class='ovr', average="weighted")
         elif model_option == "Decision Tree":
                 prediction = dt.predict(data_processed)
-                auc = roc_auc_score(y_test,dtr.predict_proba(data_processed), multi_class='ovr', average="weighted")
+                auc = roc_auc_score(y_test, dt.predict_proba(data_processed), multi_class='ovr', average="weighted")
         elif model_option == "KNN":
                 prediction = knn.predict(data_processed)
                 auc = roc_auc_score(y_test, knn.predict_proba(data_processed), multi_class='ovr', average="weighted")
