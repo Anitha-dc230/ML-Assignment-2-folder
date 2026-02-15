@@ -75,7 +75,7 @@ uploaded_file = st.file_uploader("Upload CSV file for prediction", type=["csv"])
 if uploaded_file is not None:
     test_data = pd.read_csv(uploaded_file)
     st.write("### Uploaded Test Data")
-    st.dataframe(test_data.head())
+    #st.dataframe(test_data.head())
     
     for col in test_data.select_dtypes(include='object').columns:
         le = LabelEncoder()
