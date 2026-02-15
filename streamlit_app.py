@@ -82,10 +82,10 @@ if uploaded_file is not None:
     data_processed = preprocess_uploaded_data(X_test)
     
     st.write("Columns in uploaded file:", data_processed.columns)
-    st.write("Columns expected by pipeline:", pipeline.feature_names_in_)
+    #st.write("Columns expected by pipeline:", pipeline.feature_names_in_)
 
     # Ensure correct column order
-    data_processed = data_processed[FEATURE_COLUMNS]
+    #data_processed = data_processed[FEATURE_COLUMNS]
     
     if st.button("Predict my obesity level"):
 
