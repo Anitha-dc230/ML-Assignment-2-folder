@@ -82,7 +82,7 @@ if uploaded_file is not None:
     data = preprocess_uploaded_data(X_test)
     data_processed = pipeline.transform(data)
     
-    st.write("Columns in uploaded file:", data_processed.columns)
+    #st.write("Columns in uploaded file:", data_processed.columns)
     #st.write("Columns expected by pipeline:", pipeline.feature_names_in_)
 
     # Ensure correct column order
