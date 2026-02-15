@@ -104,7 +104,7 @@ if uploaded_file is not None:
 
         
         predicted_class = prediction[0]
-        accuracy = accuracy_score(y_test, prediction)
+        accuracy = accuracy_score(y_test, prediction[0])
         precision = precision_score(y_test, prediction, average='weighted')
         recall = recall_score(y_test, prediction, average='weighted')
         f1 = f1_score(y_test, prediction, average='weighted')
