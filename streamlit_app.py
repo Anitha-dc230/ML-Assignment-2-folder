@@ -36,10 +36,31 @@ class_labels = {
 }
 
 st.write(
-    "Enter your data on the left in CSV format or enter separately and click **Predict** to see your obesity level."
+    "Enter your data in CSV format and click **Predict** to see your obesity level."
 )
 
 #st.sidebar.header("Your Health details")
+def preprocess_uploaded_data(df):
+
+    # Binary Encoding
+    df["Gender"] = df["Gender"].map({"Female": 1, "Male": 0})
+    df["family_history_with_overweight"] = df["family_history_with_overweight"].map({"Yes": 1, "No": 0})
+    df["FAVC"] = df["FAVC"].map({"Yes": 1, "No": 0})
+    df["CAEC"] = df["CAEC"].map({"Yes": 1, "No": 0})
+    df["SMOKE"] = df["SMOKE"].map({"Yes": 1, "No": 0})
+    df["SCC"] = df["SCC"].map({"Yes": 1, "No": 0})
+    df["CALC"] = df["CALC"].map({"Yes": 1, "No": 0})
+
+    # Transportation Encoding
+    df["MTRANS"] = df["MTRANS"].map({
+        "Automobile": 0,
+        "Motorbike": 1,
+        "Bike": 2,
+        "Public Transportation": 3,
+        "Walking": 4
+    })
+
+    return df
 
 uploaded_file = st.file_uploader("Upload CSV file for prediction", type=["csv"])
 
@@ -47,14 +68,25 @@ if uploaded_file is not None:
     test_data = pd.read_csv(uploaded_file)
     st.write("### Uploaded Test Data")
     st.dataframe(test_data.head())
-    
-    X_test = test_data.drop("NObeyesdad", axis=1)
-    y_test = test_data["NObeyesdad"]
 
-    data_processed = pipeline.transform(X_test)
-    st.write("Columns in uploaded file:", X_test.columns)
+    # Separate target if present
+    if "NObeyesdad" in test_data.columns:
+        y_test = test_data["NObeyesdad"]
+        X_test = test_data.drop("NObeyesdad", axis=1)
+    else:
+        X_test = test_data
+        y_test = None
+
+    #data_processed = pipeline.transform(X_test)
+    # Manual preprocessing
+    data_processed = preprocess_uploaded_data(X_test)
+    
+    st.write("Columns in uploaded file:", data_processed.columns)
     st.write("Columns expected by pipeline:", pipeline.feature_names_in_)
 
+    # Ensure correct column order
+    data_processed = data_processed[FEATURE_COLUMNS]
+    
     if st.button("Predict my obesity level"):
 
         if model_option == "Logistic Regression":
