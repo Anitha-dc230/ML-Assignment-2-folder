@@ -259,4 +259,5 @@ joblib.dump(nb, "model/naive_bayes_model.pkl")
 joblib.dump(rf, "model/random_forest_model.pkl")
 joblib.dump(xgb, "model/xgboost_model.pkl")
 joblib.dump(scaler, "model/preprocessing_pipeline.pkl")
+joblib.dump(label_encoders, "model/label_encoders.pkl")
 
