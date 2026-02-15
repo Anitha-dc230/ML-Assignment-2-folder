@@ -10,13 +10,13 @@ import seaborn as sns
 st.title("Obesity Level Classification App")
 
 # Load models
-lr = joblib.load("logistic_regression_model.pkl")
-dt = joblib.load("decision_tree_model.pkl")
-knn = joblib.load("knn_model.pkl")
-nb = joblib.load("naive_bayes_model.pkl")
-rf = joblib.load("random_forest_model.pkl")
-xgb = joblib.load("xgboost_model.pkl")
-pipeline = joblib.load("preprocessing_pipeline.pkl")
+lr = joblib.load("model/logistic_regression_model.pkl")
+dt = joblib.load("model/decision_tree_model.pkl")
+knn = joblib.load("model/knn_model.pkl")
+nb = joblib.load("model/naive_bayes_model.pkl")
+rf = joblib.load("model/random_forest_model.pkl")
+xgb = joblib.load("model/xgboost_model.pkl")
+pipeline = joblib.load("model/preprocessing_pipeline.pkl")
 
 model_option = st.selectbox(
     "Select Model",
