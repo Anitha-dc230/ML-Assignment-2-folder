@@ -114,7 +114,14 @@ if uploaded_file is not None:
                 prediction = nb.predict(data_processed)
         elif model_option == "Random Forest":
                 prediction = rf.predict(data_processed)
-                auc = roc_auc_score(y_test, rf.predict_proba(data_processed), multi_class='ovr')
+                #auc = roc_auc_score(y_test, rf.predict_proba(data_processed), multi_class='ovr')
+                probs = rf.predict_proba(data_processed)
+
+                auc = roc_auc_score(  y_test,
+                    probs,
+                    multi_class="ovr",
+                    average="weighted")
+
         else:
                 prediction = xgb.predict(data_processed)
 
