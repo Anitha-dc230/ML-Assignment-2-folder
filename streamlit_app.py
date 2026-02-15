@@ -124,7 +124,7 @@ if uploaded_file is not None:
 
         else:
                 prediction = xgb.predict(data_processed)
-                prediction = prediction + 1
+                #prediction = prediction + 1
 
         
         predicted_class = int(prediction[0])
@@ -140,7 +140,7 @@ if uploaded_file is not None:
        # if model_option == "XGBoost":
         #    st.success(f"Predicted Obesity Level: {predicted_class, class_labels[int(predicted_class)]}")
         #else:
-        st.success(f"Predicted Obesity Level: {predicted_class, class_labels[predicted_class]}")
+        #st.success(f"Predicted Obesity Level: {predicted_class, class_labels[predicted_class]}")
 
         st.write("## Confusion Matrix")
 
