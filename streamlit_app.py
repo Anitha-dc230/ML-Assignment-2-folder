@@ -39,7 +39,6 @@ st.write(
     "Enter your data in CSV format and click **Predict** to see your obesity level."
 )
 
-#st.sidebar.header("Your Health details")
 def preprocess_uploaded_data(df):
 
     # Binary Encoding
@@ -56,11 +55,17 @@ def preprocess_uploaded_data(df):
         "Automobile": 0,
         "Motorbike": 1,
         "Bike": 2,
-        "Public Transportation": 3,
+        "Public_Transportation": 3,
         "Walking": 4
     })
 
     return df
+label_encoders = {}
+
+for col in df.select_dtypes(include='object').columns:
+    le = LabelEncoder()
+    df[col] = le.fit_transform(df[col])
+    label_encoders[col] = le
 
 uploaded_file = st.file_uploader("Upload CSV file for prediction", type=["csv"])
 
@@ -71,23 +76,22 @@ if uploaded_file is not None:
 
     # Separate target if present
     if "NObeyesdad" in test_data.columns:
-        y_test = test_data["NObeyesdad"]
+        y_test_raw = test_data["NObeyesdad"]
         X_test = test_data.drop("NObeyesdad", axis=1)
+        # Apply the same label encoder used for training target
+        if 'NObeyesdad' in label_encoders:
+            y_test = label_encoders['NObeyesdad'].transform(y_test_raw)
+        else:
+            y_test = y_test_raw
     else:
         X_test = test_data
         y_test = None
 
-    #data_processed = pipeline.transform(X_test)
     # Manual preprocessing
     data = preprocess_uploaded_data(X_test)
     data_processed = pipeline.transform(data)
     
-    #st.write("Columns in uploaded file:", data_processed.columns)
-    #st.write("Columns expected by pipeline:", pipeline.feature_names_in_)
-
-    # Ensure correct column order
-    #data_processed = data_processed[FEATURE_COLUMNS]
-    
+  
     if st.button("Predict my obesity level"):
 
         if model_option == "Logistic Regression":
@@ -141,7 +145,7 @@ if uploaded_file is not None:
         col2.metric("MCC", f"{mcc:.4f}")
         col3.metric("AUC", auc)
 
-        st.write("### Input Features Sent to Model")
+        #st.write("### Input Features Sent to Model")
         #st.dataframe(data)
 else:
     st.info("Fill the details on the left and click **Predict my obesity level**.")
