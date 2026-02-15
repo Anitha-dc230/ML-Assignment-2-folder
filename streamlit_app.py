@@ -78,12 +78,9 @@ if uploaded_file is not None:
     st.write("### Uploaded Test Data")
     #st.dataframe(test_data.head())
     
-    for col in test_data.select_dtypes(include='object').columns:
-        #le = LabelEncoder()
-        le = label_encoders[col]
-        test_data[col] = le.transform(test_data[col])
-        #test_data[col] = le.fit_transform(test_data[col])
-        #label_encoders[col] = le
+     for col in label_encoders:
+        if col in test_data.columns:
+            test_data[col] = label_encoders[col].transform(test_data[col])
         
     # Separate target if present
     if "NObeyesdad" in test_data.columns:
