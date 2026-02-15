@@ -106,18 +106,18 @@ if uploaded_file is not None:
                 prediction = lr.predict(data_processed)
                 auc = roc_auc_score(y_test, lr.predict_proba(data_processed), multi_class='ovr', average="weighted")
         elif model_option == "Decision Tree":
-                prediction = dt.predict(data_processed)
-                auc = roc_auc_score(y_test, dt.predict_proba(data_processed), multi_class='ovr', average="weighted")
+                prediction = dt.predict(X_test)
+                auc = roc_auc_score(y_test, dt.predict_proba(X_test), multi_class='ovr', average="weighted")
         elif model_option == "KNN":
                 prediction = knn.predict(data_processed)
                 auc = roc_auc_score(y_test, knn.predict_proba(data_processed), multi_class='ovr', average="weighted")
         elif model_option == "Naive Bayes":
-                prediction = nb.predict(data_processed)
-                auc = roc_auc_score(y_test, nb.predict_proba(data_processed), multi_class='ovr', average="weighted")
+                prediction = nb.predict(X_test)
+                auc = roc_auc_score(y_test, nb.predict_proba(X_test), multi_class='ovr', average="weighted")
         elif model_option == "Random Forest":
-                prediction = rf.predict(data_processed)
-                #auc = roc_auc_score(y_test, rf.predict_proba(data_processed), multi_class='ovr')
-                probs = rf.predict_proba(data_processed)
+                prediction = rf.predict(X_test)
+                #auc = roc_auc_score(y_test, rf.predict_proba(X_test), multi_class='ovr')
+                probs = rf.predict_proba(X_test)
 
                 auc = roc_auc_score(  y_test,
                     probs,
