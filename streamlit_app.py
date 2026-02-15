@@ -143,7 +143,7 @@ if uploaded_file is not None:
 
         st.write("## Classification Report")
 
-        report = classification_report(y_test, y_pred)
+        report = classification_report(y_test, prediction)
         st.text(report)
 
         st.write("## Evaluation Metrics")
