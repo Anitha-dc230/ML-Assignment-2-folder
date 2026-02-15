@@ -53,7 +53,7 @@ if uploaded_file is not None:
 
     data_processed = pipeline.transform(X_test)
 
-if st.button("Predict my obesity level"):
+    if st.button("Predict my obesity level"):
 
         if model_option == "Logistic Regression":
                 prediction = lr.predict(data_processed)
