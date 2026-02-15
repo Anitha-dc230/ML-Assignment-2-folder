@@ -88,16 +88,16 @@ if uploaded_file is not None:
         X_test = test_data.drop("NObeyesdad", axis=1)
         # Apply the same label encoder used for training target
         #if 'NObeyesdad' in label_encoders:
-        y_test = label_encoders['NObeyesdad'].transform(y_test_raw)
+        #y_test = label_encoders['NObeyesdad'].transform(y_test_raw)
         #else:
         #    y_test = y_test_raw
-        #y_test = y_test_raw
+        y_test = y_test_raw
     else:
         X_test = test_data
         y_test = None
 
     # Manual preprocessing
-    data = preprocess_uploaded_data(X_test)
+    #data = preprocess_uploaded_data(X_test)
     data_processed = pipeline.transform(data)
     
   
@@ -118,7 +118,7 @@ if uploaded_file is not None:
 
         
         predicted_class = prediction[0]
-        accuracy = accuracy_score(y_test, prediction[0])
+        accuracy = accuracy_score(y_test, prediction)
         precision = precision_score(y_test, prediction, average='weighted')
         recall = recall_score(y_test, prediction, average='weighted')
         f1 = f1_score(y_test, prediction, average='weighted')
