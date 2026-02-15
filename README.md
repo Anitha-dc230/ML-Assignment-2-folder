@@ -122,18 +122,24 @@ Ensemble models (Random Forest and XGBoost) achieved the highest performance. Lo
 
 Model Comparison Table:
 
-ML Model Name	Accuracy	AUC	Precision	Recall	F1	MCC
-Logistic Regression	0.867	0.985	0.867	0.867	0.865	0.846
-Decision Tree	0.917	0.950	0.920	0.917	0.918	0.903
-kNN	0.806	0.946	0.813	0.806	0.798	0.777
-Naive Bayes	0.602	0.907	0.645	0.602	0.579	0.547
-Random Forest (Ensemble)	0.957	0.997	0.960	0.957	0.958	0.950
-XGBoost (Ensemble)	0.957	0.996	0.959	0.957	0.957	0.950
+ML Model Name	      Accuracy	AUC	  Precision	Recall	F1	  MCC
+Logistic Regression	0.867    	0.985	0.867	    0.867	  0.865	0.846
+Decision Tree	      0.917	    0.950	0.920	    0.917	  0.918	0.903
+kNN	                0.806	    0.946	0.813	    0.806	  0.798	0.777
+Naive Bayes	        0.602	    0.907	0.645	    0.602	  0.579	0.547
+Random Forest (Ensemble)0.957	0.997	0.960	    0.957	  0.958	0.950
+XGBoost (Ensemble)	0.957	  0.996	  0.959	    0.957	  0.957	0.950
+
 ML Model Name	Observation about model performance
 Logistic Regression	Performs well for linearly separable patterns. Provides stable precision and recall but may struggle with complex nonlinear relationships.
+
 Decision Tree	Captures nonlinear relationships effectively but tends to overfit without pruning. Performance varies depending on tree depth.
+
 kNN	Performs reasonably well after scaling. Sensitive to feature scaling and computationally expensive for large datasets.
+
 Naive Bayes	Fast and computationally efficient. Performance slightly lower due to strong independence assumption between features.
+
 Random Forest (Ensemble)	Strong and stable performance across all metrics. Reduces overfitting and captures complex feature interactions effectively.
+
 XGBoost (Ensemble)	Achieved the best or near-best performance. High AUC, F1, and MCC due to boosting strategy and improved generalization ability.
 
