@@ -52,6 +52,8 @@ if uploaded_file is not None:
     y_test = test_data["NObeyesdad"]
 
     data_processed = pipeline.transform(X_test)
+    st.write("Columns in uploaded file:", X_test.columns)
+    st.write("Columns expected by pipeline:", pipeline.feature_names_in_)
 
     if st.button("Predict my obesity level"):
 
