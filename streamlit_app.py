@@ -105,6 +105,7 @@ if uploaded_file is not None:
 
         if model_option == "Logistic Regression":
                 prediction = lr.predict(data_processed)
+                auc = roc_auc_score(y_test, lr.predict_proba(data_processed), multi_class='ovr')
         elif model_option == "Decision Tree":
                 prediction = dt.predict(data_processed)
         elif model_option == "KNN":
@@ -113,6 +114,7 @@ if uploaded_file is not None:
                 prediction = nb.predict(data_processed)
         elif model_option == "Random Forest":
                 prediction = rf.predict(data_processed)
+                auc = roc_auc_score(y_test, rf.predict_proba(data_processed), multi_class='ovr')
         else:
                 prediction = xgb.predict(data_processed)
 
@@ -122,7 +124,7 @@ if uploaded_file is not None:
         precision = precision_score(y_test, prediction, average='weighted')
         recall = recall_score(y_test, prediction, average='weighted')
         f1 = f1_score(y_test, prediction, average='weighted')
-        auc = roc_auc_score(y_test, model.predict_proba(data_processed), multi_class='ovr')
+        #auc = roc_auc_score(y_test, model.predict_proba(data_processed), multi_class='ovr')
         mcc = matthews_corrcoef(y_test, prediction)
     
         st.write("Predictions:")
