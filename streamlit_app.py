@@ -137,7 +137,7 @@ if uploaded_file is not None:
         recall = recall_score(y_test, prediction, average='weighted')
         f1 = f1_score(y_test, prediction, average='weighted')
         #auc = roc_auc_score(y_test, model.predict_proba(data_processed), multi_class='ovr')
-        auc = 0
+        #auc = 0
         mcc = matthews_corrcoef(y_test, prediction)
     
         st.write("Predictions:")
