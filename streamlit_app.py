@@ -142,6 +142,6 @@ if uploaded_file is not None:
         col3.metric("AUC", auc)
 
         st.write("### Input Features Sent to Model")
-        st.dataframe(data)
+        #st.dataframe(data)
 else:
     st.info("Fill the details on the left and click **Predict my obesity level**.")
