@@ -39,7 +39,7 @@ st.write(
     "Enter your data on the left in CSV format or enter separately and click **Predict** to see your obesity level."
 )
 
-st.sidebar.header("Your Health details")
+#st.sidebar.header("Your Health details")
 
 uploaded_file = st.file_uploader("Upload CSV file for prediction", type=["csv"])
 
