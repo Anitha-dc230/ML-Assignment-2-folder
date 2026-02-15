@@ -133,12 +133,14 @@ Model Comparison Table:
 | XGBoost              | 0.95     | 0.99 | 0.95      | 0.95   | 0.95     | 0.95 |
 
 
-|ML Model Name	        |Observation about model performance                                                                                                         |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|Logistic Regression	|Performs well for linearly separable patterns. Provides stable precision and recall but may struggle with complex nonlinear relationships.  |
-|Decision Tree	        |Captures nonlinear relationships effectively but tends to overfit without pruning. Performance varies depending on tree depth.              |
-|kNN	                |Performs reasonably well after scaling. Sensitive to feature scaling and computationally expensive for large datasets.                      |
-|Naive Bayes	        |Fast and computationally efficient. Performance slightly lower due to strong independence assumption between features.                      |
-|Random Forest(Ensemble)|Strong and stable performance across all metrics. Reduces overfitting and captures complex feature interactions effectively.                |
-|XGBoost (Ensemble)	    |Achieved the best or near-best performance. High AUC, F1, and MCC due to boosting strategy and improved generalization ability.             |
+## Model Observations
+
+| ML Model Name           | Observation about model performance |
+|-------------------------|--------------------------------------|
+| Logistic Regression     | Performs well for linearly separable patterns. Provides stable precision and recall but may struggle with complex nonlinear relationships. |
+| Decision Tree           | Captures nonlinear relationships effectively but tends to overfit without pruning. Performance varies depending on tree depth. |
+| KNN                     | Performs reasonably well after scaling. Sensitive to feature scaling and computationally expensive for large datasets. |
+| Naive Bayes             | Fast and computationally efficient. Performance slightly lower due to strong independence assumption between features. |
+| Random Forest (Ensemble)| Strong and stable performance across all metrics. Reduces overfitting and captures complex feature interactions effectively. |
+| XGBoost (Ensemble)      | Achieved the best or near-best performance. High AUC, F1, and MCC due to boosting strategy and improved generalization ability. |
 
