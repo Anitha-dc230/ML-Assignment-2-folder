@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import joblib
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix, classification_report, matthews_corrcoef
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 st.title("Obesity Level Classification App")
@@ -33,10 +36,24 @@ class_labels = {
 }
 
 st.write(
-    "Enter your data on the left and click **Predict** to see your obesity level."
+    "Enter your data on the left in CSV format or enter separately and click **Predict** to see your obesity level."
 )
 
 st.sidebar.header("Your Health details")
+
+uploaded_file = st.file_uploader("Upload CSV file for prediction", type=["csv"])
+
+if uploaded_file is not None:
+    test_data = pd.read_csv(uploaded_file)
+    st.write("### Uploaded Test Data")
+    st.dataframe(test_data.head())
+    
+    X_test = test_data.drop("NObeyesdad", axis=1)
+    y_test = test_data["NObeyesdad"]
+
+    data_processed = pipeline.transform(X_test)
+
+'''
 # -----------------------------
 # Inputs
 # -----------------------------
@@ -87,11 +104,9 @@ data_in = {
 
 data = pd.DataFrame([data_in], columns=FEATURE_COLUMNS)
 
-#uploaded_file = st.file_uploader("Upload CSV file for prediction", type=["csv"])
 
-#if uploaded_file is not None:
-    #data = pd.read_csv(uploaded_file)
 data_processed = pipeline.transform(data)
+'''
 
 if st.button("Predict my obesity level"):
 
@@ -107,11 +122,44 @@ if st.button("Predict my obesity level"):
                 prediction = rf.predict(data_processed)
         else:
                 prediction = xgb.predict(data_processed)
+
         
         predicted_class = prediction[0]
+        accuracy = accuracy_score(y_test, prediction)
+        precision = precision_score(y_test, prediction, average='weighted')
+        recall = recall_score(y_test, prediction, average='weighted')
+        f1 = f1_score(y_test, prediction, average='weighted')
+        auc = roc_auc_score(y_test, model.predict_proba(data_processed), multi_class='ovr')
+        mcc = matthews_corrcoef(y_test, prediction)
     
         st.write("Predictions:")
         st.success(f"Predicted Obesity Level: {predicted_class, class_labels[predicted_class]}")
+
+        st.write("## Confusion Matrix")
+
+        cm = confusion_matrix(y_test, prediction)
+
+        fig, ax = plt.subplots()
+        sns.heatmap(cm, annot=True, fmt='d', cmap="Blues", ax=ax)
+        ax.set_xlabel("Predicted")
+        ax.set_ylabel("Actual")
+
+        st.pyplot(fig)
+
+        st.write("## Classification Report")
+
+        report = classification_report(y_test, y_pred)
+        st.text(report)
+
+        st.write("## Evaluation Metrics")
+        col1, col2, col3 = st.columns(3)
+        col1.metric("Accuracy", f"{accuracy:.4f}")
+        col2.metric("Precision", f"{precision:.4f}")
+        col3.metric("Recall", f"{recall:.4f}")
+
+        col1.metric("F1 Score", f"{f1:.4f}")
+        col2.metric("MCC", f"{mcc:.4f}")
+        col3.metric("AUC", auc)
 
         st.write("### Input Features Sent to Model")
         st.dataframe(data)
