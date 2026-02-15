@@ -46,10 +46,10 @@ def preprocess_uploaded_data(df):
     df["Gender"] = df["Gender"].map({"Female": 1, "Male": 0})
     df["family_history_with_overweight"] = df["family_history_with_overweight"].map({"Yes": 1, "No": 0})
     df["FAVC"] = df["FAVC"].map({"Yes": 1, "No": 0})
-    df["CAEC"] = df["CAEC"].map({"Yes": 1, "No": 0})
+    df["CAEC"] = df["CAEC"].map({"Always": 1, "Frequently": 1, "Sometimes": 0})
     df["SMOKE"] = df["SMOKE"].map({"Yes": 1, "No": 0})
     df["SCC"] = df["SCC"].map({"Yes": 1, "No": 0})
-    df["CALC"] = df["CALC"].map({"Yes": 1, "No": 0})
+    df["CALC"] = df["CALC"].map({"Always": 1, "Frequently": 1, "Sometimes": 0, "no": 0})
 
     # Transportation Encoding
     df["MTRANS"] = df["MTRANS"].map({
