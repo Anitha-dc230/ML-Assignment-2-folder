@@ -40,10 +40,10 @@ st.write(
     "Enter your data in CSV format and click **Predict** to see your obesity level."
 )
 
-st.write("Pipeline Loaded:", pipeline)
-st.write("Pipeline Type:", type(pipeline))
-st.write("Pipeline Steps:", pipeline.named_steps)
-st.write("Expected Features:", pipeline.feature_names_in_)
+#st.write("Pipeline Loaded:", pipeline)
+#st.write("Pipeline Type:", type(pipeline))
+#st.write("Pipeline Steps:", pipeline.named_steps)
+#st.write("Expected Features:", pipeline.feature_names_in_)
 
 def preprocess_uploaded_data(df):
 
@@ -88,10 +88,10 @@ if uploaded_file is not None:
         X_test = test_data.drop("NObeyesdad", axis=1)
         # Apply the same label encoder used for training target
         #if 'NObeyesdad' in label_encoders:
-        #    y_test = label_encoders['NObeyesdad'].transform(y_test_raw)
+        y_test = label_encoders['NObeyesdad'].transform(y_test_raw)
         #else:
         #    y_test = y_test_raw
-        y_test = y_test_raw
+        #y_test = y_test_raw
     else:
         X_test = test_data
         y_test = None
