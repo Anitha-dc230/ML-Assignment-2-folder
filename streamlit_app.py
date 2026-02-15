@@ -40,6 +40,11 @@ st.write(
     "Enter your data in CSV format and click **Predict** to see your obesity level."
 )
 
+st.write("Pipeline Loaded:", pipeline)
+st.write("Pipeline Type:", type(pipeline))
+st.write("Pipeline Steps:", pipeline.named_steps)
+st.write("Expected Features:", pipeline.feature_names_in_)
+
 def preprocess_uploaded_data(df):
 
     # Binary Encoding
