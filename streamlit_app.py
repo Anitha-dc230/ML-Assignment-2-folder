@@ -124,6 +124,7 @@ if uploaded_file is not None:
 
         else:
                 prediction = xgb.predict(data_processed)
+                prediction = prediction + 1
 
         
         predicted_class = int(prediction[0])
