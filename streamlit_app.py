@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from sklearn.preprocessing import LabelEncoder
 import joblib
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix, classification_report, matthews_corrcoef
 import matplotlib.pyplot as plt
