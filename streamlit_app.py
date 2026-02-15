@@ -67,7 +67,6 @@ def preprocess_uploaded_data(df):
     })
 
     return df
-label_encoders = {}
 
 
 
