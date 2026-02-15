@@ -17,6 +17,7 @@ nb = joblib.load("model/naive_bayes_model.pkl")
 rf = joblib.load("model/random_forest_model.pkl")
 xgb = joblib.load("model/xgboost_model.pkl")
 pipeline = joblib.load("model/preprocessing_pipeline.pkl")
+label_encoders = joblib.load('model/label_encoders.pkl')
 
 model_option = st.selectbox(
     "Select Model",
@@ -78,9 +79,11 @@ if uploaded_file is not None:
     #st.dataframe(test_data.head())
     
     for col in test_data.select_dtypes(include='object').columns:
-        le = LabelEncoder()
-        test_data[col] = le.fit_transform(test_data[col])
-        label_encoders[col] = le
+        #le = LabelEncoder()
+        le = label_encoders[col]
+        test_data[col] = le.transform(test_data[col])
+        #test_data[col] = le.fit_transform(test_data[col])
+        #label_encoders[col] = le
         
     # Separate target if present
     if "NObeyesdad" in test_data.columns:
